@@ -1,0 +1,120 @@
+
+@import url('https://fonts.googleapis.com/css?family=Asap');
+
+.subWrapper{
+	text-align: center;
+	background-color: #f2f2f2;
+	height:200px;
+	overflow: hidden;
+}
+
+.box{
+	display: inline-block;
+	text-align: left;
+	height: 200px;
+	width: 180px;
+	margin: 0 5px 0 5px;
+	font-family: 'Asap', sans-serif;
+	cursor: pointer;
+}
+
+
+.box img{
+	width: 180px;
+	height: 100px;
+}
+
+.box h1{
+	font-size: 1.5em;
+	color: #3177ec;
+	width: 180px;
+	height: 50px;
+	overflow: hidden;
+}
+
+.box p{
+	width: 180px;
+	height: 50px;
+	overflow:hidden;
+}
+
+
+.hotPicks{
+	margin-left: -16px;
+	margin-right: -16px;
+}
+
+#hotPickCarousel{
+	position: relative;
+	margin-top: 50px;
+	height: 600px;
+	width: 100%;
+}
+
+#hotPickCarousel img{
+	height: 600px;
+	width: 100%;
+}
+
+.jumboContent{
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: right;
+	height: 100%;
+	width: 400px;
+	color: white;
+	padding-left: 60px;
+  opacity: 0;
+  
+  transition: opacity 500ms linear;
+}
+
+.ribbon2{
+  font-size: 25px;
+  color: white;
+  width: 300px;
+  padding: 5px;
+  position: absolute;
+  text-align: center;
+  right: 0;
+  top: 10px;
+  border-top-right-radius: 3px;
+  background: #F47530;
+  z-index: 1000;
+  margin-top: 40px;
+}
+
+
+.ribbon2:before, .ribbon2:after{
+  content: "";
+  position: absolute;
+}
+
+.ribbon2:after{
+  height: 0;
+  width: 0;
+  left: -29.5px;
+  top: 0;
+  border-top: 47.5px solid #F47530;
+  border-left: 30px solid transparent;
+}
+
+.jumboContent p{
+	font-size: 20px;
+  text-align: right;
+  margin-top: 100px;
+	padding-right: 10px;
+  padding-left: 10px;
+}
+
+.hotPickBg{
+  background: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+  background: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+  background: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+  background: linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+  opacity: 0;
+}
+
+
+

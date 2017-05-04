@@ -1,0 +1,51 @@
+
+.register{
+	position: relative;
+	margin: 5% auto;
+	padding: 20px;
+	width: 300px;
+	height: 400px;
+	background-color: white;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.element{
+	border-bottom: 2px solid;
+}
+
+.heading{
+	background-color: #3177ec;
+	margin: -25px -20px 20px -20px;
+	padding-top: 1px;
+	height: 80px;
+}
+
+.register h1{
+	margin: 20px 0 20px 85px;
+	color: #fff;
+}
+
+.register span{
+	font-size: 1.5em;
+	margin-left: 5px;
+}
+
+.signUp{
+	margin: 10px 5px -15px 20px;
+	width: 200px;
+	height: 40px;
+	font-size: 1.5em;
+	border: none;
+	background:transparent;
+}
+
+.registerBtn{
+	margin: 40px 5px 20px 30px;
+	width: 200px;
+	height: 50px;
+	font-size: 2em;
+	background-color: #1CB94E;
+	color: #fff;
+	border: none;
+}
+

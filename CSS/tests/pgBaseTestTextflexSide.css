@@ -1,0 +1,121 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto+Condensed';
+
+
+
+body{
+  background-color: #d9d9d9;
+}
+
+.mainContent{
+	background-color: white;
+	font-family: 'Asap', sans-serif;
+	padding-bottom: 100px;
+}
+
+.mainWrapper{
+	margin: 100px 20px 0 20px;
+}
+
+.subWrapper{
+	margin-left: 20px;
+}
+
+
+.shadowSide{
+	position: relative;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.shadowSide:before, .shadowSide:after{
+	content: "";
+	position: aboslute;
+	z-index: -1;
+	box-shadow: 0 0 20px rbga(0, 0, 0, 0.8);
+	top: 10px;
+	bottom: 10px;
+	left: 0;
+	right: 0;
+	border-radius: 100px/10px;
+}
+
+.shadowSide:after{
+	right: 10px;
+	left: auto;
+	transform:skew(8deg) rotate(3deg);
+}
+
+.navbar{
+	z-index: 2000;
+}
+
+.navbar-brand{
+	font-family: 'Satisfy', cursive;
+}
+
+.logo{
+	font-size: 2em;
+	color:#3177ec;
+}
+
+.caret{
+	margin-left: 4px;
+}
+
+#login-dp{
+	min-width: 250px;
+	padding: 14px 14px 0;
+	overflow:hidden;
+}
+
+#login-dp .help-block{
+	font-size:12px;
+}
+
+
+#login-dp .form-group{
+	margin-bottom: 10px;
+}
+
+#login-dp .bottom{
+	background-color:rgba(255,255,255,.8);
+	border-top:1px solid #ddd;
+	clear: both;
+	padding: 14px;
+}
+
+@media(max-width:768px){
+	#login-dp{
+		background-color: inherit;
+		color: #fff;
+	}
+	
+	#login-dp .bottom{
+		background-color: inherit;
+		border-top: 0 none;
+	}
+}
+
+.btnCustom {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  background-color: inherit;
+  border: 1px solid transparent;
+  border-radius: 4px;
+	line-height: 1.42857143
+}
+
+
+https://jsfiddle.net/MadLittleMods/EM4xL/

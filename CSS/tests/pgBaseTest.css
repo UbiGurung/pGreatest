@@ -1,0 +1,88 @@
+
+.navbar-brand{
+	font-family: 'Satisfy', cursive;
+}
+
+.logo{
+	font-size: 2em;
+	color:#3177ec;
+}
+
+.caret{
+	margin-left: 4px;
+}
+
+#login-dp{
+	min-width: 250px;
+	padding: 14px 14px 0;
+	overflow:hidden;
+	background-color: rgba(255,255,255,.8);
+}
+
+#login-dp .help-block{
+	font-size:12px;
+}
+
+
+#login-dp .form-group{
+	margin-bottom: 10px;
+}
+
+#login-dp .bottom{
+	backgroun-color:rgba(255,255,255,.8);
+	border-top:1px solid #ddd;
+	clear: both;
+	padding: 14px;
+}
+
+@media(max-width:768px){
+	#login-dp{
+		background-color: inherit;
+		color: #fff;
+	}
+	
+	#login-dp .bottom{
+		background-color: inherit;
+		border-top: 0 none;
+	}
+}
+
+.btnCustom {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  background-color: inherit;
+  border: 1px solid transparent;
+  border-radius: 4px;
+	line-height: 1.42857143
+}
+
+.pollPicks{
+	padding-top: 50px;
+}
+
+.img-thumnail{
+	height: 200px;
+	width: 200px;
+	padding-left: 15px;
+}
+
+.pollPicks .col-md-2{
+	padding: 10px;
+}
+
+
+img { transition: all .1s ease-in-out; }
+img:hover { transform: scale(1.1); }

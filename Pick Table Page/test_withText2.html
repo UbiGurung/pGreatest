@@ -1,0 +1,139 @@
+<html>
+<head>
+	<title>People's Greatest</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="pgBaseTestText2.css">
+	<link rel = "icon" href = "images/pgLogo2.jpg">
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+		$(".sidenav").click(function(){
+			$(".picks").toggleClass("slideUp");
+			$(".sidenav").toggleClass("slideUp");
+		});
+		
+		for (var i = 1; i < 26; i++)
+		{
+				var input = "<div class='card'><div class='poll poll-" + i + " shadow'><h1>Title No." + i + "</h1><p></p></div></div>";
+				$(".pollPicks").append(input);
+				var para = "Ius ne diam epicurei iracundia, per modo invidunt ei. Mei cu docendi salutandi assentior, et sit oratio nominavi quaestio, et qui lobortis patrioque. Eirmod graecis at cum, eum id justo fierent. Sea no duis omnes mnesarchum, atqui deterruisset necessitatibus ex nam. Feugait voluptaria his an, an diam elit altera nec. Ad nec ullum eligendi contentiones, te feugiat accusam qui, solum percipit pri ei.";
+
+				$("p").text(para);
+		}
+		
+		$(".poll").click(function() {
+			var title = $(this).find('h1');
+			$(this).fadeOut("slow");
+			$(this).delay(800).queue(function() { $(this).detach();});
+			$(title).delay(1000).queue(function() { $(title).appendTo(".picks"); });
+			
+		});
+	});
+	
+	</script>
+
+</head>
+
+<body>
+	
+	<nav class="navbar navbar-default" role="navigation">
+	<div class="container">
+		
+			<div class="navbard-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toCollapse">
+					<span class="sr-only">Toggle Navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span class="logo">People's Greatest</span></a>
+			</div>
+			
+		<div class="collapse navbar-collapse" id="toCollapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="home.html">Home</a></li>
+				<li><a href="categories.html">Categories</a></li>
+				<li><a href="about.html">About Us</a></li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+			
+			<div class="col-sm-3 col-md-3 pull-right">
+				<form class="navbar-form" role="search">
+					<div class="input-group">
+						<div class="input-group-btn">
+							<button class="btnCustom" type="submit"><i style="font-size: 1.45em" class="glyphicon glyphicon-search"></i></button>
+						</div>
+						<input type="text" class="form-control" placeholder="Search" name="srch-term">
+					</div>
+				</form>
+			</div>
+			
+			<ul class="nav navbar-nav navbar-left">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+					<ul id="login-dp" class="dropdown-menu">
+						<li>
+							<div class="row">
+								<div class="col-md-12">
+								Login
+									<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+										<div class="form-group">
+											<label class="sr-only" for="exampleInputEmail2">Email address</label>
+											<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+										</div>
+										<div class="form-group">
+											<label class="sr-only" for="exampleInputPassword2">Password</label>
+											<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+											<div class="help-block text-right"><a href="#">Forgotten password?</a></div>
+										</div>
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+										</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox">Keep me logged-in
+											</label>
+										</div>
+									</form>
+								</div>
+								<div class="bottom text-center">
+									Need an account ? <a href="#"><b>Register here</b></a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	
+	<div class="s-wrapper">
+		<div id="sideMenu" class="sidenav">
+			<h3><span class="glyphicon glyphicon-th-list"></span>Your picks</h3>
+		</div>
+		<div class="picks">
+			
+		</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+				<div class="col-lg-12">
+					<h2>Pick your greatest...</h2>
+				</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="pollPicks">
+	
+		</div>
+	</div>
+</body>
+</html>
