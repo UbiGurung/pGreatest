@@ -48,6 +48,7 @@
 			</div>
 		</div>
 		-->
+
 		<div class="profile-wrapper">
 			<div class="left-menu">
 				<h1>Timeline</h1>
@@ -63,7 +64,19 @@
 						</form>
 					</div>
 				</div>
-				<h1 id="username"><?php htmlout($_SESSION['username']); ?></h1>
+				<h1 class="username" id="<?php htmlout($_SESSION['username']); ?>"><?php htmlout($_SESSION['username']); ?></h1>
+				<script type="text/javascript">
+				</script>
+				<div class="profileDesc">
+					<form action="" method="post">
+						<div class="infoWrapper">
+							<div class="infoMask"></div>
+						<textarea name="newInfo" id="info"><?php if($profileInfo === ""): ?>No Description<?php else:htmlout($profileInfo); endif;?></textarea>
+						</div>
+						<input class="btn-info change" name="action" type="submit" value="Change" disabled onclick="changeInfo();">
+						<input class="btn-info cancel" type="button" value="Cancel" disabled>
+					</form>
+				</div>
 			</div>
 
 			<div class="bottom-center-menu">
@@ -75,7 +88,26 @@
 	
 	
 	<script type="text/javascript">
-		
+	if($('.username').text() == "<?php htmlout($_SESSION['username']); ?>")
+	{
+		var curText = $('#info').text();
+
+		$('.infoWrapper').on('click', function(){
+			$('.infoMask').css('display', 'none');
+			$('.btn-info').prop('disabled', false);
+			$('.btn-info').css('opacity', 1);
+		});
+
+		$('.cancel').on('click', function(){
+			$('#info').val(curText);
+			$('.infoMask').css('display', 'inline');
+			$('.btn-info').prop('disabled', true);
+			$('.btn-info').css('opacity', 0);
+		});
+	}
+
+
+
 	//$(document).ready(function() {
 	//	$('#changeDp').click(function() {
 	//		
