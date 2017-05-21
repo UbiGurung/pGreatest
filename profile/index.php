@@ -19,7 +19,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/access.inc.php';
 		
 		try
 		{
-			$sql = "SELECT displayPicture, dateJoin, profileInfo FROM user WHERE id = :id";
+			$sql = "SELECT id, displayPicture, dateJoin, profileInfo FROM user WHERE id = :id";
 			$s = $pdo->prepare($sql);
 			$s->bindValue(":id", $_SESSION['id']);
 			$s->execute();
@@ -32,7 +32,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/access.inc.php';
 		}
 		
 		$results = $s->fetch();
-		
+
+		$userId = $results['id'];
 		$dateJoin = $results['dateJoin'];
 		$dp = $results['displayPicture'];
 		$profileInfo = $results['profileInfo'];
@@ -43,6 +44,32 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/access.inc.php';
 		header('Location: ../home/index.php');
 		exit();
 	}
+
+	if (pollExist($userId))
+		{
+			include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';
+			try
+			{
+				$sql = "SELECT id, pollname, pollText, thumbnailURL, voters 
+				FROM poll 
+				WHERE userId = :userId AND visible = 1
+				ORDER BY voters DESC
+				limit 10";
+				$s = $pdo->prepare($sql);
+				$s->bindValue(":userId", $userId);
+				$s->execute();
+			}
+			catch(PDOException $e)
+			{
+				$error = "Could not create the poll" . $e;
+				include '../includes/error.html.php';
+				exit();
+			}
+			
+			$polls = $s->fetchAll();
+		}
+
+
 
 	if(isset($_POST['action']) and $_POST['action'] == 'Change')
 	{

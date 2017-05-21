@@ -8,41 +8,35 @@
 	background-color: blue;
 }
 
+.profile-wrapper{
+	background-color: red;
+	position: relative;
+	height: 100vh;
+}
 
 .left-menu{
-	float: left;
-	height: auto;
-	min-height: 700px;
+	position: absolute;
+	height: 90%;
 	width: 20%;
 	background-color: #afceff;
 	margin-left: 5%;
 }
 
-.left-menu h1{
-	margin-left: 50px;
-}
-
 .top-center-menu{
-	float: right;
-}
-
-.top-table h1{
-	margin-bottom: 30px;
-}
-
-.top-table{
+	position: absolute;
+	height: 30%;
+	width: 60%;
 	background-color: #e5b3d8;
-	margin-right: 100px;
-	margin-bottom: 20px;
+	margin-left: 30%;
 }
 
 .bottom-center-menu{
-	width: 720px;
-	margin-right: 100px;
-	margin-bottom: 50px;
-	float: right;	
+	position: absolute;
 	height: auto;
+	width: 60%;
 	background-color: #d5f7d4;
+	margin-left: 30%;
+	margin-top: 20%;
 }
 
 .displayPic img{
@@ -92,8 +86,8 @@
 }
 
 .profileDesc{
-	width: 80%;
-	margin: 0 auto;
+	width: 40%;
+	margin-left: 33%;
 }
 
 #info{
@@ -124,16 +118,11 @@
 	padding: 10px;
 }
 
-.innerWrap h1{
-	margin-left: 50px;
-}
-
 .userUploads li{
 	float: left;
 	padding: 2px;
 	width: 200px;
 	margin: 10px;
-	cursor: pointer;
 }
 
 .userUploads{
@@ -163,4 +152,5 @@
 
 .top-table, .top-table td{
 	border-collapse: collapse;
+	border: 1px solid white;
 }

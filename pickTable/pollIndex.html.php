@@ -41,7 +41,7 @@
 		
 		$(".flex-container").delegate(".poll", "click", function(){
 			var pollId = $(this).attr('id');
-			$.redirect('search.php', {name:pollId});
+			$.redirect('../includes/search.php', {name:pollId});
 		});
 		
 	});

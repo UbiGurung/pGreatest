@@ -94,6 +94,7 @@ function pollCount($id)
 		return $count;
 	}
 
+
 function userVoted($pollid, $ip)
 {
 	include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';
