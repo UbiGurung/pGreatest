@@ -1,4 +1,3 @@
-
 <form action="" method="post">
 	<div>
 		<input type="hidden" name="action" value="logout">

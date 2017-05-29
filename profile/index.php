@@ -12,16 +12,55 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/access.inc.php';
 		$file = array_rand($files);
 		return $files[$file];
 	}
-	
-	if($_SESSION['loggedIn'])
+
+	function checkHistory($userId)
 	{
 		include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';
-		
+
 		try
 		{
-			$sql = "SELECT id, displayPicture, dateJoin, profileInfo FROM user WHERE id = :id";
+			$sql = "SELECT COUNT(*) FROM voted WHERE userId = :id";
 			$s = $pdo->prepare($sql);
-			$s->bindValue(":id", $_SESSION['id']);
+			$s->bindValue(":id", $userId);
+			$s->execute();
+		}
+		catch(PDOException $e)
+		{
+			$error = "Could not search for user's poll history";
+			include '../includes/error.html.php';
+			exit();
+		}
+
+		$counts = $s->fetch();
+
+		if($counts[0] > 0)
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	
+	if(isset($_SESSION['id']) or isset($_POST['user']))
+	{
+		include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';
+
+		if(isset($_POST['user']))
+		{
+			$id = $_POST['user'];
+		}
+		else
+		{
+			$id = $_SESSION['id'];
+		}
+
+		try
+		{
+			$sql = "SELECT id, username, displayPicture, dateJoin, profileInfo FROM user WHERE id = :id";
+			$s = $pdo->prepare($sql);
+			$s->bindValue(":id", $id);
 			$s->execute();
 		}
 		catch(PDOException $e)
@@ -34,10 +73,45 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/access.inc.php';
 		$results = $s->fetch();
 
 		$userId = $results['id'];
+
+		if(isset($_POST['user']))
+		{
+			$username = $results['username'];
+		}
+		else
+		{
+			$username = $_SESSION['username'];
+		}
+		
 		$dateJoin = $results['dateJoin'];
 		$dp = $results['displayPicture'];
 		$profileInfo = $results['profileInfo'];
 		$dpDefault = '../uploads/displayPicture/default.png';
+
+		try
+		{
+			$sql = "SELECT poll.id, poll.pollname, poll.userId, poll.polldate, poll.thumbnailURL, voted.voteDate FROM poll
+			INNER JOIN voted
+			ON poll.id = voted.pollid
+			WHERE voted.userId = :id
+			ORDER BY voted.voteDate DESC limit 5";
+			$s = $pdo->prepare($sql);
+			$s->bindValue(":id", $id);
+			$s->execute();
+		}
+		catch(PDOException $e)
+		{
+			$error = "Could not gather poll history for user." . $e;
+			include '../includes/error.html.php';
+			exit();
+		}
+
+		$history = $s->fetchAll();
+
+		foreach($history as $row)
+		{
+			$pollHisSearch[] = array('id' => $row['id'], 'pollname' => $row['pollname'], 'thumbnailURL' => $row['thumbnailURL'], 'voteDate' => $row['voteDate']);
+		}
 	}
 	else
 	{

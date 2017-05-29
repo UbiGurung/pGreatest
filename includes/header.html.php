@@ -1,3 +1,63 @@
+<script type="text/javascript">
+		$(document).ready(function(){
+
+
+			var checkbox = $('#remember'),
+				userField = $('#email'),
+				passField = $('#password'),
+				form = $('#login-nav'),
+				userKey = 'savedUsername',
+				passKey ='savedPassword',
+
+				username = $.jStorage.get(userKey);
+				password = $.jStorage.get(passKey);
+
+				<?php if(!isset($_SESSION['loggedIn'])): ?>
+					$.jStorage.deleteKey(userKey);
+					$.jStorage.deleteKey(passKey);
+				<?php endif; ?>
+
+				if(username && password)
+				{
+					userField.val(username);
+					passField.val(password);
+					checkbox.prop('checked', true);
+					form.submit();
+				}
+				else
+				{
+					userField.prop('checked', false);
+				}
+
+				form.submit(function(e){
+					if(checkbox.prop('checked'))
+					{
+						$.jStorage.set(userKey, userField.val());
+						$.jStorage.set(passKey, passField.val());
+					}
+					else
+					{
+						$.jStorage.deleteKey(userKey);
+						$.jStorage.deleteKey(passKey);
+					}
+				});
+
+			$(".btnCustom").click(function(){
+				var term = $("#srch-term").val();
+				
+				if(term == '')
+				{
+					alert("Please enter a pollname to search for");
+				}
+				else
+				{
+					$.redirect('../pickTable/index.php', {searchPoll: term});
+				}
+			});
+		});
+	</script>
+
+
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container">
 		
@@ -19,7 +79,7 @@
 			</ul>
 			
 			<div class="col-sm-3 col-md-3 pull-right">
-					<div class="input-group">
+					<div class="input-group searchBar">
 						<div class="input-group-btn">
 							<button class="btnCustom"><i style="font-size: 1.45em" class="glyphicon glyphicon-search"></i></button>
 						</div>
@@ -67,7 +127,7 @@
 										</div>
 										<div class="checkbox">
 											<label>
-												<input type="checkbox">Keep me logged-in
+												<input type="checkbox" id="remember">Keep me logged-in
 											</label>
 										</div>
 									</form>
@@ -87,20 +147,3 @@
 		</div>
 	</div>
 	</nav>
-	
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$(".btnCustom").click(function(){
-				var term = $("#srch-term").val();
-				
-				if(term == '')
-				{
-					alert("Please enter a pollname to search for");
-				}
-				else
-				{
-					$.redirect('../pickTable/index.php', {searchPoll: term});
-				}
-			});
-		});
-	</script>

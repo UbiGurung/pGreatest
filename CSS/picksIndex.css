@@ -286,6 +286,13 @@ h2{
 	list-style: none;
 }
 
+.uploader{
+	float: none; 
+	background-color: #d83434; 
+	color: white;
+	z-index: 100;
+}
 
-
-	
+.uploader:hover{
+	background-color: blue;
+}

@@ -1,7 +1,20 @@
 <?php
 
+if (isset($_POST['action']) and $_POST['action'] == 'logout')
+{
+		session_start();
+		unset($_SESSION['email']);
+		unset($_SESSION['loggedIn']);
+		unset($_SESSION['password']);
+		unset($_SESSION['username']);
+		unset($_SESSION['id']);
+		header('Location:.');
+		exit();
+}
+
 if (isset($_POST['action']) and $_POST['action'] == 'login')
 	{
+
 		$password = $_POST['password'];
 		
 		if (databaseContainsAuthor($_POST['email'], $password))
@@ -46,18 +59,6 @@ if (isset($_POST['action']) and $_POST['action'] == 'login')
 			header('Location: index.php');
 			exit();
 		}
-	}
-
-	if (isset($_POST['action']) and $_POST['action'] == 'logout')
-	{
-		session_start();
-		unset($_SESSION['loggedIn']);
-		unset($_SESSION['email']);
-		unset($_SESSION['password']);
-		unset($_SESSION['username']);
-		unset($_SESSION['id']);
-		header('Location:.');
-		exit();
 	}
 	
 	session_start();

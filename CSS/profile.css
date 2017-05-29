@@ -18,8 +18,26 @@
 	margin-left: 5%;
 }
 
+.left-menu ul{
+	list-style: none;
+}
+
 .left-menu h1{
 	margin-left: 50px;
+}
+
+.left-menu h2{
+	font-size: 1.5em;
+}
+
+.left-menu p{
+	font-size: 0.75em;
+}
+
+.left-menu img{
+	width: 150px;
+	height: 100px;
+	background-color: black;
 }
 
 .top-center-menu{
@@ -49,17 +67,25 @@
 	position: absolute;
 	width: 150px;
 	height: 150px;
-	  border-radius: 50%;
-	  background-repeat: no-repeat;
-	  background-position: center center;
-	  background-size: cover;
+	border-radius: 50%;
+	background-repeat: no-repeat;
+ 	background-position: center center;
+	background-size: cover;
 }
 
 .displayPic{
-	margin: 20px 0 0 20px;
+	position: relative;
+	height: 200px;
+	width: 200px;
+	padding: 20px 0 0 20px;
+}
+
+.dp{
+	margin: auto;
 }
 
 .dp label{
+	position: absolute;
 	width: 150px;
 	height: 150px;
 	border-radius: 50%;
@@ -163,4 +189,8 @@
 
 .top-table, .top-table td{
 	border-collapse: collapse;
+}
+
+#history li{
+	cursor: pointer;
 }

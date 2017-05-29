@@ -103,13 +103,29 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/access.inc.php';
 		
 		try
 		{
-			$sql = "INSERT INTO voted SET
-				pollid = :pollid,
-				ip = :ip";
-			$s = $pdo->prepare($sql);
-			$s->bindValue(":pollid", $pollId);
-			$s->bindValue(":ip", $_SERVER['REMOTE_ADDR']);
-			$s->execute();
+			if($_SESSION['loggedIn'])
+			{
+				$sql = "INSERT INTO voted SET
+					pollid = :pollid,
+					ip = :ip,
+					userId = :id,
+					voteDate = CURDATE()";
+				$s = $pdo->prepare($sql);
+				$s->bindValue(":pollid", $pollId);
+				$s->bindValue(":ip", $_SERVER['REMOTE_ADDR']);
+				$s->bindValue(":id", $_SESSION['id']);
+				$s->execute();
+			}
+			else
+			{
+				$sql = "INSERT INTO voted SET
+					pollid = :pollid,
+					ip = :ip";
+				$s = $pdo->prepare($sql);
+				$s->bindValue(":pollid", $pollId);
+				$s->bindValue(":ip", $_SERVER['REMOTE_ADDR']);
+				$s->execute();
+			}
 		}
 		catch(PDOException $e)
 		{

@@ -3,17 +3,8 @@
 <html lang="en">
 <head>
 	<title>Create Picks</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/47585/slip.js"></script>
-	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-	<script src="../includes/jquery.redirect.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="../css/mainCss.css">
+	<?php include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/head.html.php'; ?>
 	<link rel="stylesheet" type="text/css" href="../css/profile.css">
-	<link rel = "icon" href = "images/pgLogo2.jpg">
 
 	<style>
 		body{
@@ -41,7 +32,20 @@
 
 		<div class="profile-wrapper">
 			<div class="left-menu">
-				<h1>Timeline</h1>
+				<h1>History</h1>
+				<ul id="history">
+					<?php if(checkHistory($id)): ?>
+						<?php foreach($pollHisSearch as $pollHis): ?>
+							<li id="<?php htmlout($pollHis['id']); ?>">
+								<h2><?php htmlout($pollHis['pollname']); ?></h2>
+								<img src="<?php htmlout($pollHis['thumbnailURL']); ?>">
+								<p><?php htmlout($pollHis['voteDate']); ?></p>
+							</li>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<li><p>No history found...</p></li>
+					<?php endif; ?>
+				</ul>
 			</div>
 			
 			<div class="top-center-menu">
@@ -52,15 +56,17 @@
 							<div class="displayPic">
 								<div class="dp">
 									<img src="<?php if($dp != ''){htmlout($dp);}else{htmlout($dpDefault);}?>">
-									<form>
-										<label for="upload" id="changeDp"><span class="glyphicon glyphicon-pencil"></span></label>
-										<input type="file" id="upload" name="changeDp" onchange="this.form.submit();">
-									</form>
+									<?php if(isset($_SESSION['id']) AND $_SESSION['id'] === $userId): ?>
+										<form id="picChange">
+											<label for="upload" id="changeDp"><span class="glyphicon glyphicon-pencil"></span></label>
+											<input type="file" id="upload" name="changeDp" onchange="this.form.submit();">
+										</form>
+									<?php endif; ?>
 								</div>
 							</div>
 						</td>
 						<td width="500px">
-							<h1 class="username" id="<?php htmlout($_SESSION['username']); ?>"><?php htmlout($_SESSION['username']); ?></h1>
+							<h1 class="username" id="<?php htmlout($userId); ?>"><?php htmlout($username); ?></h1>
 							<div class="profileDesc">
 								<form action="" method="post">
 									<div class="infoWrapper">
@@ -102,24 +108,33 @@
 	
 	
 	<script type="text/javascript">
-	if($('.username').text() == "<?php htmlout($_SESSION['username']); ?>")
-	{
-		var curText = $('#info').text();
 
-		$('.infoWrapper').on('click', function(){
-			$('.infoMask').css('display', 'none');
-			$('.btn-info').prop('disabled', false);
-			$('.btn-info').css('opacity', 1);
+	<?php if(isset($_SESSION['id']) AND $_SESSION['id'] === $userId): ?>
+
+			var curText = $('#info').text();
+
+			$('.infoWrapper').on('click', function(){
+				$('.infoMask').css('display', 'none');
+				$('.btn-info').prop('disabled', false);
+				$('.btn-info').css('opacity', 1);
+			});
+
+			$('.cancel').on('click', function(){
+				$('#info').val(curText);
+				$('.infoMask').css('display', 'inline');
+				$('.btn-info').prop('disabled', true);
+				$('.btn-info').css('opacity', 0);
+			});
+
+	<?php endif; ?>
+
+	$(document).ready(function() {
+		$('#history li').click(function(){
+			var pollId = $(this).attr('id');
+
+			$.redirect('../includes/search.php', {'name': pollId});
 		});
-
-		$('.cancel').on('click', function(){
-			$('#info').val(curText);
-			$('.infoMask').css('display', 'inline');
-			$('.btn-info').prop('disabled', true);
-			$('.btn-info').css('opacity', 0);
-		});
-	}
-
+	});
 
 
 	//$(document).ready(function() {

@@ -3,17 +3,8 @@
 <html>
 <head>
 	<title>People's Greatest</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="../includes/slip-master/slip.js"></script>
-	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-	<script src="../includes/jquery.redirect.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="../css/mainCss.css">
+	<?php include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/head.html.php'; ?>
 	<link rel="stylesheet" type="text/css" href="../css/picksCss.css">
-	<link rel = "icon" href = "images/pgLogo2.jpg">
 	<script type="text/javascript">
 		
 		var picks = new Array();
@@ -59,7 +50,7 @@
 					pickPos.push({'id': "" + targetId + "", 'points': "" + points + ""});
 					points -= 2;
 				}
-				$.redirect('uploadPick.php', {uploadPoll: pollId, data: pickPos});
+				$.redirect('../pickTable/uploadPick.php', {uploadPoll: pollId, data: pickPos});
 			});
 		
 		/*$(".sortable-list").delegate("li", 'click', (function(){

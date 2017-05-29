@@ -98,14 +98,25 @@ function pollCount($id)
 function userVoted($pollid, $ip)
 {
 	include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';
-	
+
 	try
 	{
-		$sql = "SELECT COUNT(*) FROM voted WHERE pollid = :pollid AND ip = :ip";
-		$s = $pdo->prepare($sql);
-		$s->bindValue(":pollid", $pollid);
-		$s->bindValue(":ip", $ip);
-		$s->execute();
+		if($_SESSION['loggedIn'])
+		{
+			$sql = "SELECT COUNT(*) FROM voted WHERE pollid = :pollid AND userId = :id";
+			$s = $pdo->prepare($sql);
+			$s->bindValue(":pollid", $pollid);
+			$s->bindValue(":id", $_SESSION['id']);
+			$s->execute();
+		}
+		else
+		{
+			$sql = "SELECT COUNT(*) FROM voted WHERE pollid = :pollid AND ip = :ip";
+			$s = $pdo->prepare($sql);
+			$s->bindValue(":pollid", $pollid);
+			$s->bindValue(":ip", $ip);
+			$s->execute();
+		}
 	}
 	catch(PDOException $e)
 	{

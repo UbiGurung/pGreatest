@@ -3,17 +3,8 @@
 <html lang="en">
 <head>
 	<title>Create Picks</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="../includes/slip-master/slip.js"></script>
-	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-	<script src="../includes/jquery.redirect.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="../css/mainCss.css">
+	<?php include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/head.html.php'; ?>
 	<link rel="stylesheet" type="text/css" href="../css/picksIndex.css">
-	<link rel = "icon" href = "images/pgLogo2.jpg">
 	<script type="text/javascript">
 		
 		var picks = new Array();
@@ -42,6 +33,11 @@
 		$(".flex-container").delegate(".poll", "click", function(){
 			var pollId = $(this).attr('id');
 			$.redirect('../includes/search.php', {name:pollId});
+		});
+
+		$('.uploader').click(function () {
+			var userId = $(this).attr('id');
+			$.redirect('../profile/index.php', {user:userId});
 		});
 		
 	});
@@ -95,7 +91,17 @@
 						<?php foreach($polls as $poll): ?>
 						<?php $pollTitle = $poll['pollname']; $pollDesc = $poll['pollText'];?>
 						<li>
-							<div style="float:left;"class="poll shadow" id="<?php htmlout($poll['id']); ?>"><p><?php htmlout($pollTitle);?></p><p><?php htmlout($pollDesc); ?></p></div>
+							<div class="poll shadow" id="<?php htmlout($poll['id']); ?>">
+								<div style="float: left; width: 50%;">
+									<p><?php htmlout($pollTitle);?></p>
+									<p><?php htmlout($pollDesc); ?></p>
+								</div>
+
+								<div style="float:right;">
+									<img src="<?php htmlout($poll['thumbnailURL']); ?>" style="height: 100px; width: 200px;">
+								</div>
+							</div>
+							<p class="uploader" id="<?php htmlout($poll['userId']); ?>">Uploaded by: <?php htmlout($poll['username']); ?></p>
 							<!--<div style="float:right;" class="editTools"><span id="editIcon" class="glyphicon glyphicon-ok tick" /></br><span id="editIcon" class="glyphicon glyphicon-remove cross" /></div> -->
 						</li>
 					<?php endforeach; ?>

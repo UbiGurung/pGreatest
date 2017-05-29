@@ -12,7 +12,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/access.inc.php';
 		
 		try
 		{
-			$sql = "SELECT * FROM poll WHERE pollname LIKE :search AND visible = 1";
+			$sql = "SELECT poll.pollname, poll.pollText, poll.id, poll.userId, poll.thumbnailURL, user.username FROM poll
+			INNER JOIN user 
+			ON poll.userId = user.id
+			WHERE pollname LIKE :search AND visible = 1";
 			$s = $pdo->prepare($sql);
 			$s->bindValue(':search', '%'.$search.'%');
 			$s->execute();
@@ -32,7 +35,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/access.inc.php';
 		{
 			
 			include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';
-			$sql = "SELECT pollname, pollText, id FROM poll WHERE visible = 1";
+			$sql = "SELECT poll.pollname, poll.pollText, poll.id, poll.userId, poll.thumbnailURL, user.username FROM poll
+			INNER JOIN user
+			ON poll.userId = user.id
+			WHERE visible = 1";
 			$s = $pdo->prepare($sql);
 			$s->execute();
 		}
