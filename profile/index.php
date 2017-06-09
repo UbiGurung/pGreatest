@@ -13,36 +13,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/access.inc.php';
 		return $files[$file];
 	}
 
-	function checkHistory($userId)
-	{
-		include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';
-
-		try
-		{
-			$sql = "SELECT COUNT(*) FROM voted WHERE userId = :id";
-			$s = $pdo->prepare($sql);
-			$s->bindValue(":id", $userId);
-			$s->execute();
-		}
-		catch(PDOException $e)
-		{
-			$error = "Could not search for user's poll history";
-			include '../includes/error.html.php';
-			exit();
-		}
-
-		$counts = $s->fetch();
-
-		if($counts[0] > 0)
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
-	}
-	
 	if(isset($_SESSION['id']) or isset($_POST['user']))
 	{
 		include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';

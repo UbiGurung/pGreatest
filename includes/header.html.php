@@ -105,6 +105,7 @@
 									<ul class="loginDrop">
 										<li><a href="../profile/index.php">Profile</a></li>
 										<li><a href="../pickIndex/index.php">My Picks</a></li>
+										<li><a href="../message/index.php">Messages</a></li>
 										<li><?php include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/logout.inc.html.php'; ?></li>
 									</ul>
 								</div>

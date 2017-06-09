@@ -136,4 +136,66 @@ function userVoted($pollid, $ip)
 		return FALSE;
 	}
 }
+
+	function checkFollow($friendId)
+	{
+		include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';
+
+		try
+		{
+			$sql = "SELECT COUNT(*) FROM friends
+			WHERE userId = :userId AND friendId = :friendId";
+			$s = $pdo->prepare($sql);
+			$s->bindValue(':userId', $_SESSION['id']);
+			$s->bindValue(':friendId', $friendId);
+			$s->execute();
+		}
+		catch(PDOException $e)
+		{
+			$error = "Could not check if two users are friends " . $e;
+			include '../includes/error.html.php';
+			exit();
+		}
+
+		$results = $s->fetch();
+
+		if($results[0] > 0)
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	function checkHistory($userId)
+	{
+		include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';
+
+		try
+		{
+			$sql = "SELECT COUNT(*) FROM voted WHERE userId = :id";
+			$s = $pdo->prepare($sql);
+			$s->bindValue(":id", $userId);
+			$s->execute();
+		}
+		catch(PDOException $e)
+		{
+			$error = "Could not search for user's poll history";
+			include '../includes/error.html.php';
+			exit();
+		}
+
+		$counts = $s->fetch();
+
+		if($counts[0] > 0)
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
 	

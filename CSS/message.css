@@ -1,0 +1,57 @@
+.messageBox{
+	height: 70vh;
+	width: 100%;
+}
+
+.messageBox td{
+	border-collapse: collapse;
+	border: 2px dashed red;
+	padding: 5px;
+	text-align: center;
+}
+
+.topButtons{
+	height: 10%;
+}
+
+.sideButtons{
+	cursor: pointer;
+}
+
+.inboxSubBtns{
+	list-style: none;	
+	margin-right: 10px;
+}
+
+.messageContent{
+	background-color: #d6d6d6;
+	position: relative;
+}
+
+.message{
+	position: absolute;
+	list-style: none;
+	top: 10px;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.message li{
+	margin: 5px 0 5px 0;
+	padding-left: 10%;
+	text-align: left;
+	width: 100%;
+	border: 2px solid blue;
+	border-collapse: collapse;
+}
+
+h2{
+	font-size: 1.5em;
+}
+
+.message img{
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+}
