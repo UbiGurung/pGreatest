@@ -198,4 +198,3 @@ function userVoted($pollid, $ip)
 			return FALSE;
 		}
 	}
-	

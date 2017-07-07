@@ -10,7 +10,7 @@ if(userLoggedIn())
 
 		try
 		{
-			$sql = "SELECT DISTINCT messages.fromId, messages.message, messages.messageStamp, user.username, user.displayPicture 
+			$sql = "SELECT DISTINCT messages.id, messages.subject, messages.fromId, messages.message, messages.messageStamp, user.username, user.displayPicture 
 			FROM messages
 			INNER JOIN user ON messages.fromId = user.id
 			WHERE messages.toId = :userId
