@@ -65,3 +65,29 @@ h2{
 	height: 50px;
 	margin-right: 10px;
 }
+
+.writeMessage{
+	position: relative;
+	height: 100%;
+}
+
+#messageForm{
+	position: absolute;
+	text-align: left;
+	height: 100%;
+	width: 90%;
+}
+
+#messageForm input{
+	width: 90%;
+	float: right;
+}
+
+#messageForm textarea{
+	height: 70%;
+	width: 100%;
+}
+
+#messageForm #send{
+	width: 100px;
+}

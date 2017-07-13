@@ -34,4 +34,62 @@ if(userLoggedIn())
 		exit();
 	}
 
+	$preSend = false;
+
+	if(isset($_POST['toName']))
+	{
+		$preSend = true;
+		$toName = $_POST['toName'];
+	}
+
+	if(isset($_POST['action']) and $_POST['action'] == 'sendMessage')
+	{
+		$fromId = $_SESSION['id'];
+		$toName = $_POST['username'];
+		$subject = $_POST['subject'];
+		$messageContent = $_POST['messageContent'];
+
+		include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/db.inc.php';
+
+		try
+		{
+			$sql = "SELECT id FROM user WHERE username = :username";
+			$s = $pdo->prepare($sql);
+			$s->bindValue(":username", $toName);
+			$s->execute();
+		}
+		catch(PDOException $e)
+		{
+			$error = "Failure in getting username of recipient " . $e;
+			include '../includes/error.html.php';
+			exit();
+		}
+
+		$results = $s->fetch();
+
+		$toId = $results['id'];
+
+		try
+		{
+			$sql = "INSERT INTO messages SET
+				subject = :subject,
+				message = :message,
+				fromId = :fromId,
+				toId = :toId,
+				messageStamp = CURDATE()";
+			$s = $pdo->prepare($sql);
+			$s->bindValue(":subject", $subject);
+			$s->bindValue(":message", $messageContent);
+			$s->bindValue(":fromId", $fromId);
+			$s->bindValue(":toId", $toId);
+			$s->execute();
+		}
+		catch(PDOException $e)
+		{
+			$error = "Failed inserting message into the database " . $e;
+			include '../includes/error.html.php';
+			exit();
+		}
+	}
+
 include 'message.html.php';

@@ -5,6 +5,10 @@
 	<title>Messages</title>
 	<?php include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/head.html.php'; ?>
 	<link rel="stylesheet" type="text/css" href="../css/message.css">
+
+	<script type="text/javascript">
+		var preSend = <?php htmlout(isset($_POST['toId'])); ?>;
+	</script>
 </head>
 
 <header>
@@ -55,7 +59,16 @@
 
 						<ul class="writeMessage" style="list-style: none;">
 							<li>
-								<p>This is where you write the message</p>
+								<form action="?messageSend" method="post" id="messageForm">
+									<?php if($preSend): ?>
+										<p>To: <input type="text" placeholder="Username" name="username" value="<?php htmlout($toName); ?>"></p>
+									<?php else: ?>
+										<p>To: <input type="text" name="username" placeholder="Username"></p>
+									<?php endif; ?>
+									<p>Subject: <input type="text" name="subject"placeholder="Subject"></p>
+									<textarea name="messageContent"></textarea>
+									<input type="submit" value="Send" id="send">							
+								</form>
 							</li>
 						</ul>
 
@@ -72,21 +85,25 @@
 		var selM = $(".selMessage");
 		var writeM = $(".writeMessage");
 
-		<?php if(isset($_POST['messageTo'])): ?>
+		<?php if($preSend): ?>
 			allM.hide();
 			selM.hide();
 			writeM.show();
-
-			$(".writeMessage li").append("<h1>" + <?php htmlout($_POST['messageTo']); ?> + "</h1>");
 		<?php endif; ?>
 
 		$("#all").on("click", function(){
+
+			<?php if($preSend){unset($_POST['toName']); $preSend=false;} ?>
+
 			selM.hide();
 			writeM.hide();
 			allM.show();
 		});
 
 		$(".message li").on("click", function(){
+
+			<?php if($preSend){unset($_POST['toName']); $preSend=false;} ?>
+
 			allM.hide();
 			writeM.hide();
 			selM.show();

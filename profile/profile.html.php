@@ -81,8 +81,8 @@
 		*/
 
 		$('.message').click(function(){
-			var userId = $('.username').attr('id');
-			$.redirect('../message/index.php', {'messageTo': userId});
+			var username = $('.username').text();
+			$.redirect('../message/index.php', {'toName': username});
 		});
 	});
 	</script>
