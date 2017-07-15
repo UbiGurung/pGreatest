@@ -42,7 +42,7 @@ if(userLoggedIn())
 		$toName = $_POST['toName'];
 	}
 
-	if(isset($_POST['action']) and $_POST['action'] == 'sendMessage')
+	if(isset($_GET['messageSend']))
 	{
 		$fromId = $_SESSION['id'];
 		$toName = $_POST['username'];

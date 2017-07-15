@@ -5,10 +5,6 @@
 	<title>Messages</title>
 	<?php include $_SERVER['DOCUMENT_ROOT'] . '/pGreatest/includes/head.html.php'; ?>
 	<link rel="stylesheet" type="text/css" href="../css/message.css">
-
-	<script type="text/javascript">
-		var preSend = <?php htmlout(isset($_POST['toId'])); ?>;
-	</script>
 </head>
 
 <header>
@@ -21,7 +17,7 @@
 			<h1>Messages</h1>
 			<table class="messageBox">
 				<tr class="topButtons">
-					<td width="10%"></td>
+					<td width="10%" id="composeMail">Compose</td>
 					<td>All Contacts</td>
 					<td>Favourites</td>
 					<td>Blocked</td>
@@ -61,13 +57,14 @@
 							<li>
 								<form action="?messageSend" method="post" id="messageForm">
 									<?php if($preSend): ?>
-										<p>To: <input type="text" placeholder="Username" name="username" value="<?php htmlout($toName); ?>"></p>
+										<p>To: <input type="text" placeholder="Username" id="toName" name="username" value="<?php htmlout($toName); ?>"></p>
 									<?php else: ?>
-										<p>To: <input type="text" name="username" placeholder="Username"></p>
+										<p>To: <input type="text" name="username" id="toName" placeholder="Username"></p>
 									<?php endif; ?>
-									<p>Subject: <input type="text" name="subject"placeholder="Subject"></p>
-									<textarea name="messageContent"></textarea>
-									<input type="submit" value="Send" id="send">							
+									<span id="userErrorMessage"></span>
+									<p>Subject: <input type="text" id="subject" name="subject"placeholder="Subject"></p>
+									<textarea name="messageContent" id="message"></textarea>
+									<input type="button" value="Send" onclick="checkUserExists();" id="send">							
 								</form>
 							</li>
 						</ul>
@@ -81,19 +78,60 @@
 
 	<script type="text/javascript">
 
+		function checkUserExists()
+		{
+			var xmlhttp = new XMLHttpRequest();
+			var username = $('#toName').val();
+			var subject = $("#subject").val();
+			var message = $("#message").val();
+
+
+			if(username != "" && subject != "" && message != "")
+			{
+				xmlhttp.onreadystatechange = function() {
+					if(this.readyState == 4 && this.status == 200){
+						document.getElementById("userErrorMessage").innerHTML = this.responseText;
+
+						if(this.responseText != "")
+						{
+							alert("You have an error");
+						}
+						else
+						{
+							$("#messageForm").submit();
+							allM.show();
+							selM.hide();
+							writeM.hide();
+						}
+					}
+				};
+
+				xmlhttp.open("GET", "messageChecklist.php?toName="+username, true);
+				xmlhttp.send();
+			}
+			else
+			{
+				alert("Either username, subject or message values are empty!");
+			}
+		}
+
 		var allM = $(".message");
 		var selM = $(".selMessage");
 		var writeM = $(".writeMessage");
+
+		selM.hide();
+		writeM.hide();
 
 		<?php if($preSend): ?>
 			allM.hide();
 			selM.hide();
 			writeM.show();
+
+			unset($_POST['toName']);
+			$preSend = false;
 		<?php endif; ?>
 
 		$("#all").on("click", function(){
-
-			<?php if($preSend){unset($_POST['toName']); $preSend=false;} ?>
 
 			selM.hide();
 			writeM.hide();
@@ -102,11 +140,15 @@
 
 		$(".message li").on("click", function(){
 
-			<?php if($preSend){unset($_POST['toName']); $preSend=false;} ?>
-
 			allM.hide();
 			writeM.hide();
 			selM.show();
 		});
+
+		$("#composeMail").on("click", function(){
+			allM.hide();
+			writeM.show();
+			selM.hide();
+		})
 	</script>
 </body>

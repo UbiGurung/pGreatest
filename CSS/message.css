@@ -91,3 +91,7 @@ h2{
 #messageForm #send{
 	width: 100px;
 }
+
+#composeMail{
+	cursor: pointer;
+}
